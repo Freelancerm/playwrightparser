@@ -471,7 +471,7 @@ class ProductRepository:
 
     @staticmethod
     def save(product_data: ProductData) -> Product:
-        """Save product using update_or_create."""
+        """Save product using update_or_create to avoid duplicates."""
         if not product_data.goods_code:
             raise ValueError("Cannot save product without goods_code.")
 
@@ -492,11 +492,8 @@ class ProductRepository:
             },
         )
 
-        logger.info(
-            "%s product with goods_code=%s",
-            "Created" if created else "Updated",
-            product.goods_code,
-        )
+        status = "Created" if created else "Updated"
+        logger.info("%s product with goods_code=%s", status, product.goods_code)
         return product
 
 

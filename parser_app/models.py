@@ -13,7 +13,7 @@ class Product(models.Model):
         decimal_places=2, max_digits=10, null=True, blank=True, default=None
     )
     photos = models.JSONField(null=True, blank=True, default=None)  # List of photo URLs
-    goods_code = models.CharField(max_length=20, unique=True)
+    goods_code = models.CharField(max_length=20)
     reviews_count = models.IntegerField(null=True, blank=True, default=None)
     screen_size = models.CharField(max_length=50, null=True, blank=True, default=None)
     screen_resolution = models.CharField(
