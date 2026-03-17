@@ -32,7 +32,6 @@ from playwright.sync_api import (
 import load_django  # noqa: F401
 from parser_app.models import Product
 
-
 HOME_URL = "https://brain.com.ua/"
 SEARCH_QUERY = "Apple iPhone 15 128GB Black"
 
@@ -80,7 +79,9 @@ class ProductData:
         return asdict(self)
 
 
-def clean_text(value: Optional[str], default: Optional[str] = DEFAULT_TEXT) -> Optional[str]:
+def clean_text(
+    value: Optional[str], default: Optional[str] = DEFAULT_TEXT
+) -> Optional[str]:
     """Normalize whitespace and return default if value is empty."""
     if not value:
         return default
@@ -88,7 +89,9 @@ def clean_text(value: Optional[str], default: Optional[str] = DEFAULT_TEXT) -> O
     return normalized if normalized else default
 
 
-def to_decimal(value: Optional[str], default: Optional[Decimal] = DEFAULT_PRICE) -> Optional[Decimal]:
+def to_decimal(
+    value: Optional[str], default: Optional[Decimal] = DEFAULT_PRICE
+) -> Optional[Decimal]:
     """Convert a price-like string to Decimal."""
     if not value:
         return default
@@ -229,18 +232,26 @@ class BrainProductParser:
             name=self._parse_name(),
             color=characteristics.get(CHAR_COLOR) if characteristics else None,
             memory=characteristics.get(CHAR_MEMORY) if characteristics else None,
-            manufacturer=characteristics.get(CHAR_MANUFACTURER) if characteristics else None,
+            manufacturer=(
+                characteristics.get(CHAR_MANUFACTURER) if characteristics else None
+            ),
             price=self._parse_price(),
             price_discount=self._parse_price_discount(),
             photos=photos_value,
             goods_code=goods_code,
             reviews_count=self._parse_reviews_count(),
-            screen_size=characteristics.get(CHAR_SCREEN_SIZE) if characteristics else None,
-            screen_resolution=characteristics.get(CHAR_SCREEN_RESOLUTION) if characteristics else None,
+            screen_size=(
+                characteristics.get(CHAR_SCREEN_SIZE) if characteristics else None
+            ),
+            screen_resolution=(
+                characteristics.get(CHAR_SCREEN_RESOLUTION) if characteristics else None
+            ),
             characteristics=characteristics_value,
         )
 
-    def _first_optional(self, selector: str, parent: Optional[Locator] = None) -> Optional[Locator]:
+    def _first_optional(
+        self, selector: str, parent: Optional[Locator] = None
+    ) -> Optional[Locator]:
         """Return first matching locator or None if it does not exist."""
         root = parent if parent is not None else self.page
         locator = root.locator(selector)
@@ -352,7 +363,9 @@ class BrainProductParser:
         if container is None:
             return DEFAULT_PRICE
 
-        return self._get_decimal_by_selectors(self.DISCOUNT_PRICE_SELECTORS, parent=container)
+        return self._get_decimal_by_selectors(
+            self.DISCOUNT_PRICE_SELECTORS, parent=container
+        )
 
     def _parse_goods_code(self) -> Optional[str]:
         """Parse product code from dedicated product code block."""
