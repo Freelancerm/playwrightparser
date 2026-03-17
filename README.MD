@@ -29,11 +29,11 @@ To install the project, follow these steps:
 6. Complete migration `python manage.py migrate`
 7. Change to your project directory in 'modules/load_django.py'
 8. Run `python -m playwright install chromium`
-9. Run the application using `python modules/1_get_info.py` to start the product parsing process
+9. Run the application using `python modules/1_parse_product.py` to start the product parsing process
 
 ## 💻 Usage
 To use the application, follow these steps:
-1. Run the application using `python modules/1_get_info.py` to start the product parsing process
+1. Run the application using `python modules/1_parse_product.py` to start the product parsing process
 
 ## 📂 Project Structure
 ```markdown
@@ -46,7 +46,7 @@ parser_app/
     models.py
     views.py
 modules/
-    1_get_info.py
+    1_parse_product.py
     load_django.py
 requirements.txt
 manage.py
