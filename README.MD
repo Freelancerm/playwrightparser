@@ -28,7 +28,8 @@ To install the project, follow these steps:
 5. Set up the Django environment using `python manage.py makemigrations`
 6. Complete migration `python manage.py migrate`
 7. Change to your project directory in 'modules/load_django.py'
-8. Run the application using `python modules/1_get_info.py` to start the product parsing process
+8. Run `python -m playwright install chromium`
+9. Run the application using `python modules/1_get_info.py` to start the product parsing process
 
 ## 💻 Usage
 To use the application, follow these steps:
